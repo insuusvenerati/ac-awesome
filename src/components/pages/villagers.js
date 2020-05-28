@@ -25,9 +25,7 @@ const VillagersPage = () => {
 
   useEffect(() => {
     (async () => {
-      await fetch(
-        `${process.env.GATSBY_API_URL}:${process.env.GATSBY_API_PORT}/villagers`
-      )
+      await fetch(`${process.env.GATSBY_API_URL}/villagers`)
         .then((res) => res.json())
         .then((data) => setData(data));
       setLoading(false);
