@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "gatsby";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./nav.css";
@@ -15,9 +15,7 @@ const Nav = () => {
       >
         <div className="flex flex-shrink-0 mr-6 text-white">
           <Link to="/">
-            <span className="text-xl font-semibold tracking-tight">
-              Animal Crossing
-            </span>
+            <span className="text-xl font-semibold tracking-tight">Animal Crossing</span>
           </Link>
         </div>
         <span
@@ -34,7 +32,7 @@ const Nav = () => {
           <div className="text-xl lg:flex-grow">
             <Link
               className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              to="/villagers"
+              to="/villagers/"
             >
               Villagers
             </Link>

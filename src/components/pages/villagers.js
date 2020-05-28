@@ -19,16 +19,15 @@ const Loading = () => (
   </div>
 );
 
-// const fetcher = (url) => fetch(url).then((response) => response.json());
-
 const VillagersPage = () => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  // const { data, error } = useSWR("http://localhost:1337/villagers", fetcher);
 
   useEffect(() => {
     (async () => {
-      await fetch(`http://localhost:1337/villagers`)
+      await fetch(
+        `http://${process.env.GATSBY_API_URL}:${process.env.GATSBY_API_PORT}/villagers`
+      )
         .then((res) => res.json())
         .then((data) => setData(data));
       setLoading(false);
@@ -39,15 +38,14 @@ const VillagersPage = () => {
     return <Error />;
   } else if (isLoading) {
     return <Loading />;
-  } else {
-    return (
-      <div className="flex flex-wrap justify-center w-full mt-5 lg:w-5/6">
-        {data.map((asset) => (
-          <VillagerCard3 key={asset._id} asset={asset} />
-        ))}
-      </div>
-    );
   }
+  return (
+    <div className="flex flex-wrap justify-center w-full mt-5 lg:w-5/6">
+      {data.map((asset) => (
+        <VillagerCard3 key={asset._id} asset={asset} />
+      ))}
+    </div>
+  );
 };
 
 export default VillagersPage;

@@ -1,2 +1,8 @@
 [dev]
-  publish = "build"
+  publish = "public"
+
+[build]
+  publish = "public"
+
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"
