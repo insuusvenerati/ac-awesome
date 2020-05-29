@@ -11,15 +11,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "create-hmac": "^1.1.7",
-    "crypto-js": "^4.0.0",
     "gatsby": "^2.22.10",
+    "gatsby-plugin-manifest": "^2.4.9",
+    "gatsby-plugin-offline": "^3.2.7",
     "gatsby-plugin-postcss": "^2.3.2",
     "react": "^16.13.1",
     "react-content-loader": "^5.0.4",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-shimmer": "^3.0.3",
     "tailwindcss": "^1.4.6"
   },
   "scripts": {

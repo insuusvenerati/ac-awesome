@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import VillagerCard3 from "../cards/villagercard3";
-import Loader from "../loader/loader";
+import VillagerCard from "../cards/villagercard";
+import { CardLoader } from "../loader/cardloader";
 
 const Error = () => (
   <div className="flex flex-wrap justify-center w-full mt-5 ml-10 md:w-4/5 md:justify-start">
@@ -9,13 +9,13 @@ const Error = () => (
 );
 
 const Loading = () => (
-  <div className="flex flex-wrap justify-center w-full mt-5 text-white md:w-4/5 md:justify-center">
-    <Loader />
-    <Loader />
-    <Loader />
-    <Loader />
-    <Loader />
-    <Loader />
+  <div className="flex flex-wrap justify-center w-full lg:w-5/6">
+    <CardLoader />
+    <CardLoader />
+    <CardLoader />
+    <CardLoader />
+    <CardLoader />
+    <CardLoader />
   </div>
 );
 
@@ -25,10 +25,14 @@ const VillagersPage = () => {
 
   useEffect(() => {
     (async () => {
-      await fetch(`${process.env.GATSBY_API_URL}/villagers`)
+      await fetch(
+        `${process.env.GATSBY_API_URL}${
+          process.env.GATSBY_API_PORT ? ":1337" : ""
+        }/villagers`
+      )
         .then((res) => res.json())
         .then((data) => setData(data));
-      setLoading(false);
+      // setLoading(false);
     })();
   }, []);
 
@@ -38,9 +42,9 @@ const VillagersPage = () => {
     return <Loading />;
   }
   return (
-    <div className="flex flex-wrap justify-center w-full mt-5 lg:w-5/6">
+    <div className="flex flex-wrap justify-center w-full lg:w-5/6">
       {data.map((asset) => (
-        <VillagerCard3 key={asset._id} asset={asset} />
+        <VillagerCard key={asset._id} asset={asset} />
       ))}
     </div>
   );

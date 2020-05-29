@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
 import * as createHmac from "create-hmac";
+import React, { useEffect, useState } from "react";
 
-const KEY = "a95185ca73638006efc498aba222928be81341f000a5787ec76701ae4b6ec162";
-const SALT = "cba311161eab3324661edd4043248ab3281557d6c9bbb8b3cff8e448b9ce92aa";
+const KEY = process.env.GATSBY_IMGPROXY_KEY;
+const SALT = process.env.GATSBY_IMGPROXY_SALT;
 
-export const ImgProxy = ({
+const ImgProxy = ({
   width = 100,
   height = 100,
   extension = "",
@@ -36,13 +36,11 @@ export const ImgProxy = ({
     const encoded_url = urlSafeBase64(url);
     const path = `/${resizing_type}/${width}/${height}/${gravity}/${enlarge}/${encoded_url}.${extension}`;
     const signature = sign(SALT, path, KEY);
-    const result = `https://acawesome.b-cdn.net/${signature}${path}`;
+    const result = `${process.env.GATSBY_IMGPROXY_URL}${signature}${path}`;
     setImgUrl(result);
   }, []);
 
-  return (
-    <div>
-      <img src={imgUrl} alt="" />
-    </div>
-  );
+  return <img style={{ width: "384px", height: "384px" }} src={imgUrl} alt="" />;
 };
+
+export default ImgProxy;

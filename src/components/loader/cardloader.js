@@ -1,36 +1,41 @@
 import React from "react";
-import { ImgProxy } from "../imgproxy/imgproxy";
+import Loader from "./loader";
 
-const VillagerCard3 = ({ asset }) => {
+export const CardLoader = () => {
   return (
     <>
       <div
         style={{ backgroundColor: "#ffebee" }}
-        className="w-full max-w-sm m-3 bg-white rounded-lg sm:w-1/2 lg:w-1/3"
+        className="w-full max-w-md m-3 bg-white rounded-lg lg:w-1/3"
       >
-        <div className="overflow-hidden rounded-lg shadow-xl">
-          <ImgProxy width={384} height={384} url={asset.houseImage} />
+        <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
+          <p
+            className="flex items-center justify-center"
+            style={{ width: "384px", height: "384px" }}
+          >
+            <Loader />
+          </p>
         </div>
         <div className="p-4">
           <p className="text-sm font-bold tracking-wide text-gray-700 uppercase">
-            {asset.name} • {asset.species}
+            Loading... • Loading...
           </p>
-          <p className="text-gray-900 list-disc">
+          <div className="text-gray-900 list-disc">
             <ul>
               <li>
-                <strong>Gender:</strong> {asset.gender}
+                <strong>Gender:</strong> Loading...
               </li>
               <li>
-                <strong>Personality:</strong> {asset.personality}
+                <strong>Personality:</strong> Loading...
               </li>
               <li>
-                <strong>Hobby:</strong> {asset.hobby}
+                <strong>Hobby:</strong> Loading...
               </li>
               <li>
-                <strong>Favorite Song:</strong> {asset.favoriteSong}
+                <strong>Favorite Song:</strong> Loading...
               </li>
             </ul>
-          </p>
+          </div>
         </div>
         <div className="flex p-4 text-gray-700 border-t border-gray-300">
           <div className="inline-flex items-center flex-1">
@@ -67,10 +72,10 @@ const VillagerCard3 = ({ asset }) => {
           </div>
           <div className="flex items-center pt-2">
             <div className="w-10 h-10 mr-3 bg-center bg-cover rounded-full">
-              <img src={asset.iconImage} alt="" />
+              <p>Loading...</p>
             </div>
             <div>
-              <p className="font-bold text-gray-900"> {asset.name} </p>
+              <p className="font-bold text-gray-900"> Loading... </p>
               <p className="text-sm text-gray-700">(555) 555-4321</p>
             </div>
           </div>
@@ -79,5 +84,3 @@ const VillagerCard3 = ({ asset }) => {
     </>
   );
 };
-
-export default VillagerCard3;
