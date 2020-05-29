@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemCard from "../cards/itemcard";
 
-const ItemsPage = () => {
+const ItemsView = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const ItemsPage = () => {
   );
 };
 
-export default ItemsPage;
+export default ItemsView;

@@ -19,7 +19,7 @@ const Loading = () => (
   </div>
 );
 
-const VillagersPage = () => {
+const VillagersView = () => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -28,11 +28,11 @@ const VillagersPage = () => {
       await fetch(
         `${process.env.GATSBY_API_URL}${
           process.env.GATSBY_API_PORT ? ":1337" : ""
-        }/villagers`
+        }/villagers?limit=25`
       )
         .then((res) => res.json())
         .then((data) => setData(data));
-      // setLoading(false);
+      setLoading(false);
     })();
   }, []);
 
@@ -50,4 +50,4 @@ const VillagersPage = () => {
   );
 };
 
-export default VillagersPage;
+export default VillagersView;

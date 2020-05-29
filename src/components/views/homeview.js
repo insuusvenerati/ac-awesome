@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Home = () => {
+export const HomeView = () => {
   return <h2 className="text-white">Home Page</h2>;
 };

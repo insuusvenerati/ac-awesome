@@ -1,11 +1,11 @@
 import React from "react";
 import { Layout } from "../components/layout/layout";
-import { Home } from "../components/pages/home";
+import { HomeView } from "../components/views/homeview";
 
 const Index = () => (
   <>
     <Layout>
-      <Home />
+      <HomeView />
     </Layout>
   </>
 );

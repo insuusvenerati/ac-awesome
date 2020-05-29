@@ -1,11 +1,11 @@
 import React from "react";
 import { Layout } from "../components/layout/layout";
-import VillagersPage from "../components/pages/villagers";
+import VillagersView from "../components/views/villagersview";
 
 const Villagers = () => {
   return (
     <Layout>
-      <VillagersPage />
+      <VillagersView />
     </Layout>
   );
 };
