@@ -9,7 +9,7 @@ export const Layout = ({ children }) => {
       <Nav />
       <div className="sticky top-0 flex justify-end w-full p-2 bg-teal-400 shadow-md">
         <input
-          className="w-1/6 p-2 rounded-sm shadow-md"
+          className="w-full p-2 rounded-sm shadow-md lg:w-1/6"
           type="search"
           name="Search"
           id="Search"
