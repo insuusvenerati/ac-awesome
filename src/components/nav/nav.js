@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import { Link } from "gatsby";
-import { faHamburger } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import Burger from "../../images/burger.svg";
 
 const Nav = () => {
   const [isOpen, setOpen] = useState(false);
@@ -9,7 +8,7 @@ const Nav = () => {
   return (
     <>
       <nav
-        className="sticky flex flex-wrap items-center justify-between p-5 bg-teal-500 lg:p-6"
+        className="flex flex-wrap items-center justify-between p-5 bg-teal-500 lg:p-6"
         role="navigation"
       >
         <div className="flex flex-shrink-0 mr-6 text-white">
@@ -17,11 +16,12 @@ const Nav = () => {
             <span className="text-xl font-semibold tracking-tight">Animal Crossing</span>
           </Link>
         </div>
-        <span
-          onClick={() => setOpen(!isOpen)}
-          className="items-end text-white lg:hidden fa-lg"
-        >
-          <FontAwesomeIcon icon={faHamburger} />
+        <span onClick={() => setOpen(!isOpen)} className="items-end text-white lg:hidden">
+          <img
+            style={{ width: "30px", height: "30px" }}
+            alt="hamburger menu icon"
+            src={Burger}
+          />
         </span>
         <div
           className={`flex-grow ${
@@ -36,12 +36,12 @@ const Nav = () => {
               Villagers
             </Link>
 
-            <a
+            <Link
               className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              href="/items"
+              to="/items/"
             >
               Items
-            </a>
+            </Link>
 
             <a
               className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"

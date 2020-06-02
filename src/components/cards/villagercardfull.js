@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ImgProxy from "../imgproxy/imgproxy";
-import { Link } from "gatsby";
 
-const VillagerCard = ({ asset }) => {
-  const [selectedVillager, setSelectedVillager] = useState("");
-
+const VillagerCardFull = ({ asset }) => {
   return (
     <>
       <div
         style={{ backgroundColor: "#ffebee" }}
-        className="w-full max-w-md mb-3 bg-white rounded-lg lg:m-3 lg:w-auto xl:w-1/3"
+        className="w-full mb-3 bg-white rounded-lg lg:m-3 "
       >
         <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
           <ImgProxy width={384} height={384} url={asset.houseImage} />
@@ -64,22 +61,16 @@ const VillagerCard = ({ asset }) => {
             </p>
           </div>
         </div>
-        <div
-          onMouseEnter={() => setSelectedVillager(asset.name)}
-          onMouseLeave={() => setSelectedVillager("")}
-          className="px-4 pt-3 pb-4 transition ease-in-out bg-gray-100 border-t border-gray-300 rounded-lg shadow-xl hover:bg-gray-200"
-        >
+        <div className="px-4 pt-3 pb-4 transition ease-in-out bg-gray-100 border-t border-gray-300 rounded-lg shadow-xl cursor-pointer hover:bg-gray-200">
           <div className="text-xs font-bold tracking-wide text-gray-600 uppercase">
             Realtor
           </div>
           <div className="flex items-center pt-2">
             <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
-              <Link to={`/villager/${selectedVillager}`}>
-                <ImgProxy width={64} height={64} url={asset.iconImage} />
-              </Link>
+              <ImgProxy width={64} height={64} url={asset.iconImage} />
             </div>
             <div>
-              <p className="font-bold text-gray-900">{asset.name}</p>
+              <p className="font-bold text-gray-900"> {asset.name} </p>
               <p className="text-sm text-gray-700">(555) 555-4321</p>
             </div>
           </div>
@@ -89,4 +80,4 @@ const VillagerCard = ({ asset }) => {
   );
 };
 
-export default VillagerCard;
+export default VillagerCardFull;

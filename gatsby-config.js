@@ -1,11 +1,23 @@
 module.exports = {
   plugins: [
-    "gatsby-plugin-postcss",
-    "gatsby-plugin-manifest",
+    `gatsby-plugin-postcss`,
+    `gatsby-plugin-manifest`,
     {
-      resolve: "gatsby-plugin-offline",
+      resolve: `gatsby-plugin-webpack-bundle-analyzer`,
       options: {
-        precachePages: ["/index/", "/villagers/"],
+        production: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-scroll-reveal`,
+      options: {
+        threshold: 0.1,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/index/`],
       },
     },
   ],

@@ -24,12 +24,11 @@ const VillagersView = () => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [limit, setLimit] = useState(25);
 
   useEffect(() => {
     (async () => {
-      await fetch(
-        `${process.env.GATSBY_API_URL}${process.env.GATSBY_API_PORT}/villagers?limit=25`
-      )
+      await fetch(`${process.env.GATSBY_API_URL}/villagers?limit=${limit}`)
         .then((res) => res.json())
         .then((data) => setData(data))
         .catch((err) => setError(err));

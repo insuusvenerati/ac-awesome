@@ -1,10 +1,14 @@
 import React from "react";
 import ACLOGO from "../../images/ac-logo-small.png";
 
-const RightSidebar = () => {
+const RightSidebar = ({ sidebar }) => {
   return (
-    <div className="sticky top-0 hidden h-full lg:block lg:w-1/6">
-      <img className="z-10" src={ACLOGO} alt="" />
+    <div
+      className={`sticky top-0 right-0 hidden h-full  lg:w-1/6 ${
+        sidebar ? "lg:block" : ""
+      } `}
+    >
+      <img src={ACLOGO} alt="Animal Crossing Logo" />
       <div className="h-full mt-4 overflow-hidden bg-white border-t-4 rounded-t rounded-b-lg shadow-lg border-red-light">
         <div className="px-6 py-4 mt-4 mb-2 mb-8">
           <div className="mb-4 tracking-wide uppercase text-c2">Section 1</div>
