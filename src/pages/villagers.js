@@ -81,9 +81,8 @@ const Villagers = () => {
         }
       >
         <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-          {searchData.map((asset) => (
-            <VillagerCard key={asset._id} asset={asset} />
-          ))}
+          {searchData &&
+            searchData.map((asset) => <VillagerCard key={asset._id} asset={asset} />)}
         </div>
       </Layout>
     );
@@ -96,9 +95,7 @@ const Villagers = () => {
       }
     >
       <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-        {data.map((asset) => (
-          <VillagerCard key={asset._id} asset={asset} />
-        ))}
+        {data && data.map((asset) => <VillagerCard key={asset._id} asset={asset} />)}
       </div>
     </Layout>
   );
