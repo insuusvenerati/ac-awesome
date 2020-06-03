@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VillagerCard from "../cards/villagercard";
 import { CardLoader } from "../loader/cardloader";
+import SearchBar from "../nav/searchbar";
 
 const Error = ({ errorMessage }) => (
   <div className="flex flex-wrap justify-center flex-1 w-1/4 h-10 mt-5 bg-red-600">
@@ -42,11 +43,13 @@ const VillagersView = () => {
     return <Loading />;
   }
   return (
-    <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-      {data.map((asset) => (
-        <VillagerCard key={asset._id} asset={asset} />
-      ))}
-    </div>
+    <>
+      <div className="flex flex-wrap justify-center w-full lg:w-5/6">
+        {data.map((asset) => (
+          <VillagerCard key={asset._id} asset={asset} />
+        ))}
+      </div>
+    </>
   );
 };
 

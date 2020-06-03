@@ -2,6 +2,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-postcss`,
     `gatsby-plugin-manifest`,
+    `gatsby-plugin-preact`,
     {
       resolve: `gatsby-plugin-webpack-bundle-analyzer`,
       options: {

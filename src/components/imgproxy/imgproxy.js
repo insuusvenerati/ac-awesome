@@ -1,8 +1,7 @@
-// import createHmac from "create-hmac";
-import jsSHA256 from "jssha/dist/sha256.js";
-import React, { useEffect, useState } from "react";
+import createHmac from "create-hmac";
 import "lazysizes";
 import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 
 const KEY = process.env.GATSBY_IMGPROXY_KEY;
 const SALT = process.env.GATSBY_IMGPROXY_SALT;
@@ -19,7 +18,7 @@ const ImgProxy = ({
   alt,
   lazyload = true,
 }) => {
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState();
 
   useEffect(() => {
     const urlSafeBase64 = (string) => {
@@ -30,29 +29,29 @@ const ImgProxy = ({
         .replace(/\//g, "_");
     };
 
-    // const hexDecode = (hex) => Buffer.from(hex, "hex");
+    const hexDecode = (hex) => Buffer.from(hex, "hex");
 
-    // const sign = (salt, target, secret) => {
-    //   const hmac = createHmac("sha256", hexDecode(secret));
-    //   hmac.update(hexDecode(salt));
-    //   hmac.update(target);
-    //   return urlSafeBase64(hmac.digest());
-    // };
+    const sign = (salt, target, secret) => {
+      const hmac = createHmac("sha256", hexDecode(secret));
+      hmac.update(hexDecode(salt));
+      hmac.update(target);
+      return urlSafeBase64(hmac.digest());
+    };
 
-    function sign(tgt) {
-      const signer = new jsSHA256("SHA-256", "TEXT", {
-        hmacKey: { value: KEY, format: "HEX" },
-      });
+    // function sign(tgt) {
+    //   const signer = new jsSHA256("SHA-256", "TEXT", {
+    //     hmacKey: { value: KEY, format: "HEX" },
+    //   });
 
-      signer.update(Buffer.from(SALT, "hex"));
-      signer.update(tgt);
+    //   signer.update(Buffer.from(SALT, "hex"));
+    //   signer.update(tgt);
 
-      return signer
-        .getHMAC("B64")
-        .replace(/=/g, "")
-        .replace(/\+/g, "-")
-        .replace(/\//g, "_");
-    }
+    //   return signer
+    //     .getHMAC("B64")
+    //     .replace(/=/g, "")
+    //     .replace(/\+/g, "-")
+    //     .replace(/\//g, "_");
+    // }
 
     const encoded_url = urlSafeBase64(url);
     const path = `/${resizing_type}/${width}/${height}/${gravity}/${enlarge}/${encoded_url}.${extension}`;
@@ -60,6 +59,10 @@ const ImgProxy = ({
     const result = `${process.env.GATSBY_IMGPROXY_URL}${signature}${path}`;
     setImgUrl(result);
   }, []);
+
+  if (!imgUrl) {
+    return <h1>Error loading image</h1>;
+  }
 
   return (
     <img
