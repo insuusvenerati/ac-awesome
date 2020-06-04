@@ -33,7 +33,7 @@ const index = client.getIndex("villagers");
 const Villagers = () => {
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [limit, setLimit] = useState(0);
   const [searchedWord, setSearchedWord] = useState("");
