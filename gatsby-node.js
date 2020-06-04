@@ -26,32 +26,32 @@ const getOneVillager = async (villagerName) => {
   }
 };
 
-// exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-//   const villagers = await getAllVillagers();
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  const villagers = await getAllVillagers();
 
-//   villagers.forEach((villager) => {
-//     const node = {
-//       name: villager.name,
-//       iconImage: villager.iconImage,
-//       houseImage: villager.houseImage,
-//       species: villager.species,
-//       gender: villager.gender,
-//       personality: villager.personality,
-//       hobby: villager.hobby,
-//       birthday: villager.birthday,
-//       catchphrase: villager.catchphrase,
-//       favoriteSong: villager.favoriteSong,
-//       id: villager._id,
-//       colors: villager.colors,
-//       styles: villager.styles,
-//       internal: {
-//         type: "Villager",
-//         contentDigest: createContentDigest(villager),
-//       },
-//     };
-//     actions.createNode(node);
-//   });
-// };
+  villagers.forEach((villager) => {
+    const node = {
+      name: villager.name,
+      iconImage: villager.iconImage,
+      houseImage: villager.houseImage,
+      species: villager.species,
+      gender: villager.gender,
+      personality: villager.personality,
+      hobby: villager.hobby,
+      birthday: villager.birthday,
+      catchphrase: villager.catchphrase,
+      favoriteSong: villager.favoriteSong,
+      id: villager._id,
+      colors: villager.colors,
+      styles: villager.styles,
+      internal: {
+        type: "Villager",
+        contentDigest: createContentDigest(villager),
+      },
+    };
+    actions.createNode(node);
+  });
+};
 
 exports.createPages = async ({ actions: { createPage } }) => {
   try {

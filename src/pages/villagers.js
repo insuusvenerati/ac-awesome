@@ -4,6 +4,7 @@ import { Layout } from "../components/layout/layout";
 import { CardLoader } from "../components/loader/cardloader";
 import SearchBar from "../components/nav/searchbar";
 import MeiliSearch from "meilisearch";
+import { graphql } from "gatsby";
 
 const Error = ({ errorMessage }) => (
   <div className="flex flex-wrap justify-center flex-1 w-1/4 h-10 mt-5 bg-red-600">
@@ -32,9 +33,9 @@ const index = client.getIndex("villagers");
 const Villagers = () => {
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [limit, setLimit] = useState(25);
+  const [limit, setLimit] = useState(0);
   const [searchedWord, setSearchedWord] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -94,11 +95,42 @@ const Villagers = () => {
         <SearchBar setSearchedWord={setSearchedWord} searchResults={searchResults} />
       }
     >
+      {/* <div className="flex flex-wrap justify-center w-full lg:w-5/6">
+        {edges.map(({ node }) => (
+          <VillagerCard key={node.id} asset={node} />
+        ))}
+      </div> */}
       <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-        {data && data.map((asset) => <VillagerCard key={asset._id} asset={asset} />)}
+        {data.map((asset) => (
+          <VillagerCard key={asset._id} asset={asset} />
+        ))}
       </div>
     </Layout>
   );
 };
 
 export default Villagers;
+
+export const query = graphql`
+  {
+    allVillager {
+      edges {
+        node {
+          id
+          birthday
+          catchphrase
+          colors
+          favoriteSong
+          gender
+          hobby
+          houseImage
+          iconImage
+          name
+          personality
+          species
+          styles
+        }
+      }
+    }
+  }
+`;
