@@ -1,33 +1,48 @@
+import Img from "gatsby-image";
 import React from "react";
-import ImgProxy from "../imgproxy/imgproxy";
 
-const VillagerCardFull = ({ asset }) => {
+const VillagerCardFull = ({
+  asset: {
+    name,
+    species,
+    gender,
+    personality,
+    hobby,
+    favoriteSong,
+    allVillagerHouseImage: {
+      childImageSharp: { fixed: houseImage },
+    },
+    allVillagerIconImage: {
+      childImageSharp: { fixed: iconImage },
+    },
+  },
+}) => {
   return (
     <>
       <div
         style={{ backgroundColor: "#ffebee" }}
-        className="w-full mb-3 bg-white rounded-lg lg:m-3 "
+        className="w-full mb-3 bg-white rounded-lg lg:m-3"
       >
         <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
-          <ImgProxy width={384} height={384} url={asset.houseImage} />
+          <Img fixed={houseImage} />
         </div>
         <div className="p-4">
           <p className="text-sm font-bold tracking-wide text-gray-700 uppercase">
-            {asset.name} • {asset.species}
+            {name} • {species}
           </p>
           <div className="text-gray-900 list-disc">
             <ul>
               <li>
-                <strong>Gender:</strong> {asset.gender}
+                <strong>Gender:</strong> {gender}
               </li>
               <li>
-                <strong>Personality:</strong> {asset.personality}
+                <strong>Personality:</strong> {personality}
               </li>
               <li>
-                <strong>Hobby:</strong> {asset.hobby}
+                <strong>Hobby:</strong> {hobby}
               </li>
               <li>
-                <strong>Favorite Song:</strong> {asset.favoriteSong}
+                <strong>Favorite Song:</strong> {favoriteSong}
               </li>
             </ul>
           </div>
@@ -67,10 +82,10 @@ const VillagerCardFull = ({ asset }) => {
           </div>
           <div className="flex items-center pt-2">
             <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
-              <ImgProxy width={64} height={64} url={asset.iconImage} />
+              <Img fixed={iconImage} />
             </div>
             <div>
-              <p className="font-bold text-gray-900"> {asset.name} </p>
+              <p className="font-bold text-gray-900"> {name} </p>
               <p className="text-sm text-gray-700">(555) 555-4321</p>
             </div>
           </div>

@@ -2,6 +2,7 @@ import createHmac from "create-hmac";
 import "lazysizes";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import Img from "gatsby-image";
 
 const KEY = process.env.GATSBY_IMGPROXY_KEY;
 const SALT = process.env.GATSBY_IMGPROXY_SALT;
@@ -64,13 +65,24 @@ const ImgProxy = ({
     return <h1>Error loading image</h1>;
   }
 
+  if (typeof imgUrl !== "string" || "Buffer" || "ArrayBuffer" || "Array") {
+    return (
+      <>
+        <h1>Invalid Img URL</h1>
+        {console.log(`Image URL:  ${imgUrl}`)}
+      </>
+    );
+  }
   return (
-    <img
-      className={`${lazyload ? "lazyload" : ""}`}
-      style={style}
-      data-src={imgUrl}
-      alt={alt}
-    />
+    <>
+      <Img
+        // className={`${lazyload ? "lazyload" : ""}`}
+        style={style}
+        // data-src={imgUrl}
+        alt={alt}
+        fixed={imgUrl}
+      />
+    </>
   );
 };
 

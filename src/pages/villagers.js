@@ -30,42 +30,53 @@ const client = new MeiliSearch({
 
 const index = client.getIndex("villagers");
 
-const Villagers = () => {
-  const [data, setData] = useState([]);
+const Villagers = ({
+  data: {
+    allVillager: { edges },
+  },
+}) => {
+  // const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [limit, setLimit] = useState(0);
   const [searchedWord, setSearchedWord] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    async function searchWithMeili() {
-      const search = await index.search(searchedWord);
-      setSearchResults(search.hits);
-    }
+    const timer = setTimeout(() => {
+      async function searchWithMeili() {
+        const search = await index.search(searchedWord);
+        setSearchResults(search.hits);
+      }
 
-    if (searchedWord) {
-      searchWithMeili();
-    }
+      if (searchedWord) {
+        searchWithMeili();
+      }
+    }, 800);
+    return () => clearTimeout(timer);
   }, [searchedWord]);
 
-  useEffect(() => {
-    (async () => {
-      await fetch(`${process.env.GATSBY_API_URL}/villagers?limit=${limit}`)
-        .then((res) => res.json())
-        .then((data) => setData(data))
-        .catch((err) => setError(err));
-      setLoading(false);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     await fetch(`${process.env.GATSBY_API_URL}/villagers?limit=${limit}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setData(data))
+  //       .catch((err) => setError(err));
+  //     setLoading(false);
+  //   })();
+  // }, []);
 
   useEffect(() => {
     setSearchData(searchResults);
   }, [searchResults]);
 
-  if (error) {
-    return <Error errorMessage={error} />;
+  if (error || edges === undefined) {
+    return (
+      <Layout>
+        <Error errorMessage={error} />
+      </Layout>
+    );
   } else if (isLoading) {
     return (
       <Layout>
@@ -95,16 +106,14 @@ const Villagers = () => {
         <SearchBar setSearchedWord={setSearchedWord} searchResults={searchResults} />
       }
     >
-      {/* <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-        {edges.map(({ node }) => (
-          <VillagerCard key={node.id} asset={node} />
-        ))}
-      </div> */}
       <div className="flex flex-wrap justify-center w-full lg:w-5/6">
+        {edges && edges.map(({ node }) => <VillagerCard key={node.id} asset={node} />)}
+      </div>
+      {/* <div className="flex flex-wrap justify-center w-full lg:w-5/6">
         {data.map((asset) => (
           <VillagerCard key={asset._id} asset={asset} />
         ))}
-      </div>
+      </div> */}
     </Layout>
   );
 };
@@ -113,22 +122,32 @@ export default Villagers;
 
 export const query = graphql`
   {
-    allVillager {
+    allVillager(limit: 10) {
       edges {
         node {
           id
-          birthday
-          catchphrase
-          colors
           favoriteSong
           gender
           hobby
-          houseImage
-          iconImage
           name
           personality
           species
-          styles
+          allVillagerIconImage {
+            childImageSharp {
+              fixed(width: 64, height: 64) {
+                ...GatsbyImageSharpFixed
+                src
+              }
+            }
+          }
+          allVillagerHouseImage {
+            childImageSharp {
+              fixed(width: 384, height: 384) {
+                ...GatsbyImageSharpFixed
+                src
+              }
+            }
+          }
         }
       }
     }

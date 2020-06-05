@@ -14,14 +14,6 @@ export const Layout = ({ children, sidebar = true, searchBar }) => {
       >
         <div className="fixed bottom-0 right-0 flex flex-col p-3">
           <div>
-            <p className="mr-5 text-white">BG by</p>
-            <p className="mb-1 mr-5 text-white">
-              <a href="https://www.instagram.com/geographyofrobots/">
-                @geographyofrobots
-              </a>
-            </p>
-          </div>
-          <div>
             <p className="mr-5 text-white">Loader by</p>
             <p className="mr-5 text-white">
               <a href="https://www.loading.io">loading.io</a>
