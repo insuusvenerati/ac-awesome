@@ -53,23 +53,23 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   });
 };
 
-exports.createPages = async ({ actions: { createPage } }) => {
-  try {
-    const allVillagers = await getAllVillagers();
-    if (allVillagers === undefined) {
-      console.error("All Villagers fetch led to undefined");
-      process.exit(2);
-    } else {
-      allVillagers.forEach((villager) => {
-        getOneVillager(villager);
-        createPage({
-          path: `/villager/${villager.name}`,
-          component: path.resolve("./src/templates/villager.js"),
-          context: { villager },
-        });
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
+// exports.createPages = async ({ actions: { createPage } }) => {
+//   try {
+//     const allVillagers = await getAllVillagers();
+//     if (allVillagers === undefined) {
+//       console.error("All Villagers fetch led to undefined");
+//       process.exit(2);
+//     } else {
+//       allVillagers.forEach((villager) => {
+//         getOneVillager(villager);
+//         createPage({
+//           path: `/villager/${villager.name}`,
+//           component: path.resolve("./src/templates/villager.js"),
+//           context: { villager },
+//         });
+//       });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
