@@ -16,6 +16,16 @@ const getAllVillagers = async () => {
   }
 };
 
+const getAllItems = async () => {
+  try {
+    const res = await fetch(`${API_URL}/items`);
+    const data = res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getOneVillager = async (villagerName) => {
   try {
     const res = await fetch(`${API_URL}/villagers?${villagerName}`);
@@ -61,7 +71,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
       process.exit(2);
     } else {
       allVillagers.forEach((villager) => {
-        getOneVillager(villager);
+        // getOneVillager(villager);
         createPage({
           path: `/villager/${villager.name}`,
           component: path.resolve("./src/templates/villager.js"),
