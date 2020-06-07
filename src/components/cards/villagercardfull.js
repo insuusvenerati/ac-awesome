@@ -9,14 +9,42 @@ const VillagerCardFull = ({
     personality,
     hobby,
     favoriteSong,
-    allVillagerHouseImage: {
-      childImageSharp: { fixed: houseImage },
-    },
-    allVillagerIconImage: {
-      childImageSharp: { fixed: iconImage },
-    },
+    allVillagerHouseImage,
+    allVillagerIconImage,
   },
 }) => {
+  // Handle missing data
+  if (
+    !name &&
+    !species &&
+    !gender &&
+    !personality &&
+    !hobby &&
+    !favoriteSong &&
+    !allVillagerHouseImage &&
+    !allVillagerIconImage
+  ) {
+    return (
+      <span
+        role="img"
+        aria-label="error"
+        className="w-auto h-auto p-2 mt-5 text-xl font-extrabold text-center bg-white border-l-8 border-pink-500 rounded-md shadow-xl lg:mt-20 lg:text-4xl"
+      >
+        😫 We were unable to load the information on this villager. Please refresh the
+        page or send a report
+      </span>
+    );
+  }
+
+  // Destructure image data from graphql
+  const {
+    childImageSharp: { fixed: houseImage },
+  } = allVillagerHouseImage;
+
+  const {
+    childImageSharp: { fixed: iconImage },
+  } = allVillagerIconImage;
+
   return (
     <>
       <div

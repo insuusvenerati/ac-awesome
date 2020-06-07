@@ -7,7 +7,7 @@ const VillagersTemplate = ({ pageContext }, data) => {
   const { villager } = pageContext;
 
   return (
-    <Layout sidebar={false}>
+    <Layout elevated={true} sidebar={false}>
       {console.log(data)}
       <div className="flex flex-wrap justify-center w-full">
         <VillagerCardFull asset={data} />

@@ -4,7 +4,7 @@ import { HomeView } from "../components/views/homeview";
 
 const Index = () => (
   <>
-    <Layout>
+    <Layout elevated={true} sidebar={false}>
       <HomeView />
     </Layout>
   </>
