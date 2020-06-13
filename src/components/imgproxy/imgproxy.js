@@ -39,21 +39,6 @@ const ImgProxy = ({
       return urlSafeBase64(hmac.digest());
     };
 
-    // function sign(tgt) {
-    //   const signer = new jsSHA256("SHA-256", "TEXT", {
-    //     hmacKey: { value: KEY, format: "HEX" },
-    //   });
-
-    //   signer.update(Buffer.from(SALT, "hex"));
-    //   signer.update(tgt);
-
-    //   return signer
-    //     .getHMAC("B64")
-    //     .replace(/=/g, "")
-    //     .replace(/\+/g, "-")
-    //     .replace(/\//g, "_");
-    // }
-
     const encoded_url = urlSafeBase64(url);
     const path = `/${resizing_type}/${width}/${height}/${gravity}/${enlarge}/${encoded_url}.${extension}`;
     const signature = sign(SALT, path, KEY);
