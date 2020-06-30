@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "./loader";
+// import Loader from "./loader";
 
 export const CardLoader = () => {
   return (
@@ -13,7 +13,7 @@ export const CardLoader = () => {
             className="flex items-center justify-center"
             style={{ width: "384px", height: "384px" }}
           >
-            <Loader />
+            {/* <Loader /> */}
           </p>
         </div>
         <div className="p-4">

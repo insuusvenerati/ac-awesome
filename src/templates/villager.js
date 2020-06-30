@@ -1,16 +1,15 @@
 import React from "react";
-import { Layout } from "../components/layout/layout";
 import VillagerCardFull from "../components/cards/villagercardfull";
-import { graphql } from "gatsby";
+import { Layout } from "../components/layout/layout";
 
-const VillagersTemplate = ({ pageContext }, data) => {
-  const { villager } = pageContext;
+const VillagersTemplate = ({ pageContext }) => {
+  const { node } = pageContext;
 
   return (
     <Layout elevated={true} sidebar={false}>
-      {console.log(data)}
+      {console.log(node)}
       <div className="flex flex-wrap justify-center w-full">
-        <VillagerCardFull asset={data} />
+        <VillagerCardFull asset={node} />
       </div>
     </Layout>
   );
@@ -18,31 +17,31 @@ const VillagersTemplate = ({ pageContext }, data) => {
 
 export default VillagersTemplate;
 
-export const query = graphql`
-  {
-    villager(name: { eq: "Agnes" }) {
-      id
-      hobby
-      gender
-      favoriteSong
-      colors
-      catchphrase
-      birthday
-      name
-      allVillagerHouseImage {
-        childImageSharp {
-          fixed {
-            src
-          }
-        }
-      }
-      allVillagerIconImage {
-        childImageSharp {
-          fixed {
-            src
-          }
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   {
+//     villager(name: { eq: "Agnes" }) {
+//       id
+//       hobby
+//       gender
+//       favoriteSong
+//       colors
+//       catchphrase
+//       birthday
+//       name
+//       allVillagerHouseImage {
+//         childImageSharp {
+//           fixed {
+//             src
+//           }
+//         }
+//       }
+//       allVillagerIconImage {
+//         childImageSharp {
+//           fixed {
+//             src
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

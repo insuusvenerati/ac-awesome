@@ -1,8 +1,6 @@
 import createHmac from "create-hmac";
-import "lazysizes";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import Img from "gatsby-image";
 
 const KEY = process.env.GATSBY_IMGPROXY_KEY;
 const SALT = process.env.GATSBY_IMGPROXY_SALT;
@@ -17,7 +15,6 @@ const ImgProxy = ({
   resizing_type = "fill",
   style,
   alt,
-  lazyload = true,
 }) => {
   const [imgUrl, setImgUrl] = useState();
 
@@ -44,29 +41,15 @@ const ImgProxy = ({
     const signature = sign(SALT, path, KEY);
     const result = `${process.env.GATSBY_IMGPROXY_URL}${signature}${path}`;
     setImgUrl(result);
-  }, []);
+  }, [enlarge, extension, gravity, height, resizing_type, url, width]);
 
   if (!imgUrl) {
     return <h1>Error loading image</h1>;
   }
 
-  if (typeof imgUrl !== "string" || "Buffer" || "ArrayBuffer" || "Array") {
-    return (
-      <>
-        <h1>Invalid Img URL</h1>
-        {console.log(`Image URL:  ${imgUrl}`)}
-      </>
-    );
-  }
   return (
     <>
-      <Img
-        // className={`${lazyload ? "lazyload" : ""}`}
-        style={style}
-        // data-src={imgUrl}
-        alt={alt}
-        fixed={imgUrl}
-      />
+      <img style={style} alt={alt} src={imgUrl} />
     </>
   );
 };
@@ -83,5 +66,4 @@ ImgProxy.propTypes = {
   resizing_type: PropTypes.string,
   style: PropTypes.string,
   alt: PropTypes.string,
-  lazyload: PropTypes.bool,
 };

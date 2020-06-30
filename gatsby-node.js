@@ -9,7 +9,7 @@ const API_URL = process.env.GATSBY_API_URL;
 const getAllVillagers = async () => {
   try {
     const res = await fetch(`${API_URL}/villagers`);
-    const data = res.json();
+    const data = await res.json();
     return data;
   } catch (error) {
     console.error(error);
@@ -18,7 +18,7 @@ const getAllVillagers = async () => {
 
 const getAllItems = async () => {
   try {
-    const res = await fetch(`${API_URL}/items`);
+    const res = await fetch(`${API_URL}/items?limit=100`);
     const data = res.json();
     return data;
   } catch (error) {
@@ -26,18 +26,35 @@ const getAllItems = async () => {
   }
 };
 
-const getOneVillager = async (villagerName) => {
-  try {
-    const res = await fetch(`${API_URL}/villagers?${villagerName}`);
-    const villager = res.json();
-    return villager;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
   const villagers = await getAllVillagers();
+  const items = await getAllItems();
+
+  items.forEach((item) => {
+    const node = {
+      id: item._id,
+      sourceSheet: item.sourceSheet,
+      name: item.name,
+      diy: item.diy,
+      size: item.size,
+      sourceNotes: item.sourceNotes,
+      interact: item.interact,
+      tag: item.tag,
+      speakerType: item.speakerType,
+      lightingType: item.lightingType,
+      catalog: item.catalog,
+      set: item.set,
+      series: item.series,
+      customizationKitCost: item.customizationKitCost,
+      variants: item.variants,
+      patternTitle: item.patternTitle,
+      internal: {
+        type: "Item",
+        contentDigest: createContentDigest(item),
+      },
+    };
+    actions.createNode(node);
+  });
 
   villagers.forEach((villager) => {
     const node = {
@@ -63,23 +80,39 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   });
 };
 
-exports.createPages = async ({ actions: { createPage } }) => {
-  try {
-    const allVillagers = await getAllVillagers();
-    if (allVillagers === undefined) {
-      console.error("All Villagers fetch led to undefined");
-      process.exit(2);
-    } else {
-      allVillagers.forEach((villager) => {
-        // getOneVillager(villager);
-        createPage({
-          path: `/villager/${villager.name}`,
-          component: path.resolve("./src/templates/villager.js"),
-          context: { villager },
-        });
-      });
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+  const allVillagers = await graphql(`
+    {
+      allVillager {
+        edges {
+          node {
+            id
+            favoriteSong
+            gender
+            hobby
+            name
+            personality
+            species
+          }
+        }
+      }
     }
-  } catch (error) {
-    console.error(error);
+  `);
+  const {
+    data: {
+      allVillager: { edges: villagersFromQuery },
+    },
+  } = allVillagers;
+  if (allVillagers.errors) {
+    reporter.panicOnBuild(`Error running the graphQL query`);
+    return;
   }
+  villagersFromQuery.forEach(({ node }) => {
+    createPage({
+      path: `/villager/${node.name}`,
+      component: path.resolve("./src/templates/villager.js"),
+      context: { node },
+    });
+  });
 };

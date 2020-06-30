@@ -19,5 +19,13 @@ module.exports = {
         name: "allVillagerIconImage",
       },
     },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "Item",
+        imagePath: "variants[].image",
+        name: "allItemImage",
+      },
+    },
   ],
 };

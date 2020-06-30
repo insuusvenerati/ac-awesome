@@ -16,7 +16,6 @@
     "gatsby-plugin-sharp": "^2.6.10",
     "gatsby-transformer-sharp": "^2.5.4",
     "isomorphic-unfetch": "^3.0.0",
-    "jssha": "^3.1.0",
     "lazysizes": "^5.2.2",
     "meilisearch": "^0.10.1",
     "prop-types": "^15.7.2",
@@ -25,11 +24,13 @@
     "react-helmet": "^6.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-virtualized": "^9.21.2",
     "tailwindcss": "^1.4.6"
   },
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "clean": "gatsby clean"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -9,8 +9,8 @@ const VillagerCardFull = ({
     personality,
     hobby,
     favoriteSong,
-    allVillagerHouseImage,
-    allVillagerIconImage,
+    // allVillagerHouseImage,
+    // allVillagerIconImage,
   },
 }) => {
   // Handle missing data
@@ -20,14 +20,14 @@ const VillagerCardFull = ({
     !gender &&
     !personality &&
     !hobby &&
-    !favoriteSong &&
-    !allVillagerHouseImage &&
-    !allVillagerIconImage
+    !favoriteSong
+    // !allVillagerHouseImage &&
+    // !allVillagerIconImage
   ) {
     return (
       <span
         role="img"
-        aria-label="error"
+        aria-label="error indicating villager didn't fetch"
         className="w-auto h-auto p-2 mt-5 text-xl font-extrabold text-center bg-white border-l-8 border-pink-500 rounded-md shadow-xl lg:mt-20 lg:text-4xl"
       >
         😫 We were unable to load the information on this villager. Please refresh the
@@ -37,13 +37,13 @@ const VillagerCardFull = ({
   }
 
   // Destructure image data from graphql
-  const {
-    childImageSharp: { fixed: houseImage },
-  } = allVillagerHouseImage;
+  // const {
+  //   childImageSharp: { fixed: houseImage },
+  // } = allVillagerHouseImage;
 
-  const {
-    childImageSharp: { fixed: iconImage },
-  } = allVillagerIconImage;
+  // const {
+  //   childImageSharp: { fixed: iconImage },
+  // } = allVillagerIconImage;
 
   return (
     <>
@@ -52,7 +52,7 @@ const VillagerCardFull = ({
         className="w-full mb-3 bg-white rounded-lg lg:m-3"
       >
         <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
-          <Img fixed={houseImage} />
+          {/* <Img fixed={houseImage} /> */}
         </div>
         <div className="p-4">
           <p className="text-sm font-bold tracking-wide text-gray-700 uppercase">
@@ -104,13 +104,13 @@ const VillagerCardFull = ({
             </p>
           </div>
         </div>
-        <div className="px-4 pt-3 pb-4 transition ease-in-out bg-gray-100 border-t border-gray-300 rounded-lg shadow-xl cursor-pointer hover:bg-gray-200">
+        <div className="px-4 pt-3 pb-4 bg-gray-100 border-t border-gray-300 rounded-lg shadow-xl">
           <div className="text-xs font-bold tracking-wide text-gray-600 uppercase">
             Realtor
           </div>
           <div className="flex items-center pt-2">
             <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
-              <Img fixed={iconImage} />
+              {/* <Img fixed={iconImage} /> */}
             </div>
             <div>
               <p className="font-bold text-gray-900"> {name} </p>

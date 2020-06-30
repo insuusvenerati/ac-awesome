@@ -35,11 +35,11 @@ const Villagers = ({
     allVillager: { edges },
   },
 }) => {
-  // const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(25);
   const [searchedWord, setSearchedWord] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -65,7 +65,7 @@ const Villagers = ({
   //       .catch((err) => setError(err));
   //     setLoading(false);
   //   })();
-  // }, []);
+  // }, [limit]);
 
   useEffect(() => {
     setSearchData(searchResults);

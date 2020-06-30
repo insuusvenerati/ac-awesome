@@ -12,27 +12,35 @@ const VillagerCard = ({ asset }) => {
     hobby,
     favoriteSong,
     species,
+    // houseImage,
+    // iconImage,
     allVillagerHouseImage: {
-      childImageSharp: { fixed: houseImage },
+      childImageSharp: {
+        fixed: houseImage,
+        // fixed: { src: houseImageSrc },
+      },
     },
     allVillagerIconImage: {
-      childImageSharp: { fixed: iconImage },
+      childImageSharp: {
+        fixed: iconImage,
+        // fixed: { src: iconImageSrc },
+      },
     },
   } = asset;
 
-  if (
-    !asset &&
-    !name &&
-    !gender &&
-    !personality &&
-    !hobby &&
-    !favoriteSong &&
-    !species &&
-    !asset.allVillagerHouseImage &&
-    !asset.allVillagerIconImage
-  ) {
-    return <h1>Error loading data</h1>;
-  }
+  // if (
+  //   !asset &&
+  //   !name &&
+  //   !gender &&
+  //   !personality &&
+  //   !hobby &&
+  //   !favoriteSong &&
+  //   !species &&
+  //   !asset.allVillagerHouseImage &&
+  //   !asset.allVillagerIconImage
+  // ) {
+  //   return <h1>Error loading data</h1>;
+  // }
 
   return (
     <>
@@ -42,6 +50,7 @@ const VillagerCard = ({ asset }) => {
       >
         <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
           <Img fixed={houseImage} />
+          {/* <ImgProxy width={400} height={400} url={houseImage} /> */}
         </div>
         <div className="p-4">
           <p className="text-sm font-bold tracking-wide text-gray-700 uppercase">
@@ -76,6 +85,7 @@ const VillagerCard = ({ asset }) => {
             <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
               <Link to={`/villager/${selectedVillager}`}>
                 <Img fixed={iconImage} />
+                {/* <ImgProxy url={iconImage} /> */}
               </Link>
             </div>
             <div>
