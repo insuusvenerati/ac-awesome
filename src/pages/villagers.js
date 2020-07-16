@@ -1,10 +1,10 @@
+import { graphql } from "gatsby";
+import MeiliSearch from "meilisearch";
 import React, { useEffect, useState } from "react";
 import VillagerCard from "../components/cards/villagercard";
 import { Layout } from "../components/layout/layout";
 import { CardLoader } from "../components/loader/cardloader";
 import SearchBar from "../components/nav/searchbar";
-import MeiliSearch from "meilisearch";
-import { graphql } from "gatsby";
 
 const Error = ({ errorMessage }) => (
   <div className="flex flex-wrap justify-center flex-1 w-1/4 h-10 mt-5 bg-red-600">
@@ -106,8 +106,11 @@ const Villagers = ({
         <SearchBar setSearchedWord={setSearchedWord} searchResults={searchResults} />
       }
     >
-      <div className="flex flex-wrap justify-center w-full lg:w-5/6">
-        {edges && edges.map(({ node }) => <VillagerCard key={node.id} asset={node} />)}
+      <div className="flex flex-wrap justify-between w-full">
+        {edges &&
+          edges.map(({ node }) => {
+            return <VillagerCard key={node.id} asset={node} />;
+          })}
       </div>
       {/* <div className="flex flex-wrap justify-center w-full lg:w-5/6">
         {data.map((asset) => (

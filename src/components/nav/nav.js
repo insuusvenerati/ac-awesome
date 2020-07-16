@@ -15,10 +15,15 @@ const Nav = ({ elevated = false }) => {
       >
         <div className="flex flex-shrink-0 mr-6 text-white">
           <Link to="/">
-            <span className="text-xl font-semibold tracking-tight">Animal Crossing</span>
+            <span className="text-xl font-semibold tracking-tight">
+              Animal Crossing
+            </span>
           </Link>
         </div>
-        <span onClick={() => setOpen(!isOpen)} className="items-end text-white lg:hidden">
+        <span
+          onClick={() => setOpen(!isOpen)}
+          className="items-end text-white lg:hidden"
+        >
           <img
             style={{ width: "30px", height: "30px" }}
             alt="hamburger menu icon"
@@ -45,33 +50,33 @@ const Nav = ({ elevated = false }) => {
               Items
             </Link>
 
-            <a
-              className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              href="/recipes"
-            >
-              Recipes
-            </a>
+            {/*<a*/}
+            {/*  className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"*/}
+            {/*  href="/recipes"*/}
+            {/*>*/}
+            {/*  Recipes*/}
+            {/*</a>*/}
 
-            <a
-              className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              href="/creatures"
-            >
-              Creatures
-            </a>
+            {/*<a*/}
+            {/*  className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"*/}
+            {/*  href="/creatures"*/}
+            {/*>*/}
+            {/*  Creatures*/}
+            {/*</a>*/}
 
-            <a
-              className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              href="/nookmiles"
-            >
-              Nook Miles
-            </a>
+            {/*<a*/}
+            {/*  className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"*/}
+            {/*  href="/nookmiles"*/}
+            {/*>*/}
+            {/*  Nook Miles*/}
+            {/*</a>*/}
 
-            <a
-              className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
-              href="/"
-            >
-              Link 6
-            </a>
+            {/*<a*/}
+            {/*  className="block mt-4 mr-4 font-semibold text-teal-200 lg:inline-block lg:mt-0 hover:text-white"*/}
+            {/*  href="/"*/}
+            {/*>*/}
+            {/*  Link 6*/}
+            {/*</a>*/}
           </div>
         </div>
       </nav>

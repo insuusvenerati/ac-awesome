@@ -6,7 +6,10 @@ const ItemCard = ({ asset }) => {
     <>
       <div
         style={{ backgroundColor: "#ffebee" }}
-        className="w-full max-w-xs mb-3 bg-white rounded-lg lg:m-3 lg:w-auto xl:w-1/3"
+        data-sal="slide-up"
+        data-sal-delay="0"
+        data-sal-easing="ease"
+        className="w-full max-w-sm mb-3 bg-white rounded-lg md:max-w-full lg:max-w-sm lg:m-3"
       >
         <div className="flex justify-center overflow-auto rounded-lg shadow-xl">
           {asset.variants.map((image) => (

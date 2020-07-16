@@ -12,35 +12,13 @@ const VillagerCard = ({ asset }) => {
     hobby,
     favoriteSong,
     species,
-    // houseImage,
-    // iconImage,
     allVillagerHouseImage: {
-      childImageSharp: {
-        fixed: houseImage,
-        // fixed: { src: houseImageSrc },
-      },
+      childImageSharp: { fixed: houseImage },
     },
     allVillagerIconImage: {
-      childImageSharp: {
-        fixed: iconImage,
-        // fixed: { src: iconImageSrc },
-      },
+      childImageSharp: { fixed: iconImage },
     },
   } = asset;
-
-  // if (
-  //   !asset &&
-  //   !name &&
-  //   !gender &&
-  //   !personality &&
-  //   !hobby &&
-  //   !favoriteSong &&
-  //   !species &&
-  //   !asset.allVillagerHouseImage &&
-  //   !asset.allVillagerIconImage
-  // ) {
-  //   return <h1>Error loading data</h1>;
-  // }
 
   return (
     <>
@@ -50,8 +28,8 @@ const VillagerCard = ({ asset }) => {
       >
         <div className="flex justify-center overflow-hidden rounded-lg shadow-xl">
           <Img fixed={houseImage} />
-          {/* <ImgProxy width={400} height={400} url={houseImage} /> */}
         </div>
+        {/* Begin Information Section */}
         <div className="p-4">
           <p className="text-sm font-bold tracking-wide text-gray-700 uppercase">
             {name} • {species}
@@ -73,29 +51,31 @@ const VillagerCard = ({ asset }) => {
             </ul>
           </div>
         </div>
+        {/* End Information Section */}
+        {/* Begin Villager Profile Section */}
         <div
           onMouseEnter={() => setSelectedVillager(name)}
           onMouseLeave={() => setSelectedVillager("")}
           className="px-4 pt-3 pb-4 transition ease-in-out bg-gray-100 border-t border-gray-300 rounded-lg shadow-xl hover:bg-gray-200"
         >
-          <div className="text-xs font-bold tracking-wide text-gray-600 uppercase">
+          <div className="text-sm font-bold tracking-wide text-gray-600 uppercase">
             Villager
-          </div>
-          <div className="flex items-center pt-2">
-            <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
-              <Link to={`/villager/${selectedVillager}`}>
-                <Img fixed={iconImage} />
-                {/* <ImgProxy url={iconImage} /> */}
-              </Link>
-            </div>
-            <div>
-              <p className="font-bold text-gray-900">{name}</p>
-              <p className="text-sm text-gray-700">(555) 555-4321</p>
+            <div className="flex items-center pt-2">
+              <div className="w-16 h-16 mr-3 bg-center bg-cover rounded-full">
+                <Link to={`/villager/${selectedVillager}`}>
+                  <Img fixed={iconImage} />
+                </Link>
+              </div>
+              <div>
+                <p className="font-bold text-gray-900">{name}</p>
+                <p className="text-sm text-gray-700">(555) 555-4321</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </>
+    /* End Villager Profile Section */
   );
 };
 

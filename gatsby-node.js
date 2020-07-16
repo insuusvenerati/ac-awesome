@@ -18,7 +18,7 @@ const getAllVillagers = async () => {
 
 const getAllItems = async () => {
   try {
-    const res = await fetch(`${API_URL}/items?limit=100`);
+    const res = await fetch(`${API_URL}/items?limit=200`);
     const data = res.json();
     return data;
   } catch (error) {
@@ -26,33 +26,37 @@ const getAllItems = async () => {
   }
 };
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  const typeDefs = `
+    type Items implements Node @infer {
+      variants: [ItemsVariants!]!
+    }
+    type ItemsVariants {
+      variation: String
+    }
+  `;
+  createTypes(typeDefs);
+};
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, schema }) => {
   const villagers = await getAllVillagers();
   const items = await getAllItems();
 
   items.forEach((item) => {
-    const node = {
-      id: item._id,
-      sourceSheet: item.sourceSheet,
-      name: item.name,
-      diy: item.diy,
-      size: item.size,
-      sourceNotes: item.sourceNotes,
-      interact: item.interact,
-      tag: item.tag,
-      speakerType: item.speakerType,
-      lightingType: item.lightingType,
-      catalog: item.catalog,
-      set: item.set,
-      series: item.series,
-      customizationKitCost: item.customizationKitCost,
-      variants: item.variants,
-      patternTitle: item.patternTitle,
+    const itemsContent = JSON.stringify(item);
+    const itemMeta = {
+      id: createNodeId(`item-${item._id}`),
+      parent: null,
+      children: [],
       internal: {
-        type: "Item",
+        type: `Items`,
+        content: itemsContent,
         contentDigest: createContentDigest(item),
       },
     };
+    const node = Object.assign({}, item, itemMeta);
     actions.createNode(node);
   });
 
